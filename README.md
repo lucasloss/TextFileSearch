@@ -3,6 +3,9 @@ Windows application that uses the Aho-Corasick algorithm to search for multiple 
 
 > **WARNING** - The current implementation is case-sensitive. For now, for a given string, you must enter all possibilities you want the application to search for. Example: when searching for all references for the word *lorem*, I would search for the following strings: *lorem*, *Lorem* and *LOREM*. That being said, I intend to add case-insensitive capabilities to the search algorithm as soon as possible.
 
+## Download
+Go to [releases](https://github.com/lucasloss/TextFileSearch/releases) to download the latest stable release.
+
 ## Basic concepts
 To search for strings in multiple files, you must enter the following information:
 * **Paths**: a list of paths from where the application will load the files.
