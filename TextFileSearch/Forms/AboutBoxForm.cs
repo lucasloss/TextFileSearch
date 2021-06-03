@@ -14,14 +14,14 @@ namespace TextFileSearch
         public AboutBoxForm()
         {
             InitializeComponent();
+            logoPictureBox.Image = Resources.TextFileSearch_96x;
             Text = string.Format("About {0}", AssemblyTitle);
             labelProductName.Text = AssemblyProduct;
             labelVersion.Text = string.Format("Version {0}", AssemblyVersion);
-            labelCopyright.Text = AssemblyCopyright;
             textBoxDescription.Text = AssemblyDescription;
         }
 
-        private string AssemblyTitle
+        private static string AssemblyTitle
         {
             get
             {
@@ -35,11 +35,11 @@ namespace TextFileSearch
                     }
                 }
 
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
             }
         }
 
-        private string AssemblyVersion
+        private static string AssemblyVersion
         {
             get
             {
@@ -47,7 +47,7 @@ namespace TextFileSearch
             }
         }
 
-        private string AssemblyDescription
+        private static string AssemblyDescription
         {
             get
             {
@@ -61,7 +61,7 @@ namespace TextFileSearch
             }
         }
 
-        private string AssemblyProduct
+        private static string AssemblyProduct
         {
             get
             {
@@ -72,20 +72,6 @@ namespace TextFileSearch
                 }
 
                 return ((AssemblyProductAttribute)attributes[0]).Product;
-            }
-        }
-
-        private string AssemblyCopyright
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return string.Empty;
-                }
-
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
         }
     }

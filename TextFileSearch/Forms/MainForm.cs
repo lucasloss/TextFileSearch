@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TextFileSearch.Properties;
 
 namespace TextFileSearch
 {
@@ -38,6 +37,18 @@ namespace TextFileSearch
             aboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
             FormClosing += MainForm_FormClosing;
 
+            Icon = Resources.TextFileSearch_16x_128x;
+            buttonSearch.Image = Resources.Search_16x;
+            buttonReloadFiles.Image = Resources.Refresh_16x;
+            buttonLoadedFiles.Image = Resources.FileCollection_16x;
+            saveProjectAsToolStripMenuItem.Image = Resources.SaveAs_16x;
+            newProjectToolStripMenuItem.Image = Resources.NewFile_16x;
+            openProjectToolStripMenuItem.Image = Resources.OpenFile_16x;
+            saveProjectToolStripMenuItem.Image = Resources.Save_16x;
+            editCurrentProjectToolStripMenuItem.Image = Resources.Edit_16x;
+            closeToolStripMenuItem.Image = Resources.Close_16x;
+            aboutToolStripMenuItem.Image = Resources.TextFileSearch_16x;
+
             LoadApplicationConfiguration();
             LoadRecentProjects();
             UpdateControls();
@@ -45,10 +56,8 @@ namespace TextFileSearch
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (AboutBoxForm form = new AboutBoxForm())
-            {
-                form.ShowDialog();
-            }
+            using AboutBoxForm form = new AboutBoxForm();
+            form.ShowDialog();
         }
 
         private void SaveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,25 +66,25 @@ namespace TextFileSearch
             {
                 if (!project.IsEmpty())
                 {
-                    using (SaveFileDialog dialog = new SaveFileDialog())
+                    using SaveFileDialog dialog = new SaveFileDialog
                     {
-                        dialog.DefaultExt = "json";
-                        dialog.Filter = "Json File (*.json)|*.json";
+                        DefaultExt = "json",
+                        Filter = "Json File (*.json)|*.json"
+                    };
 
-                        if (dialog.ShowDialog() == DialogResult.OK)
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        project.FileName = dialog.FileName;
+
+                        if (!string.IsNullOrWhiteSpace(project.FileName))
                         {
-                            project.FileName = dialog.FileName;
+                            File.WriteAllText(
+                                project.FileName,
+                                JsonConvert.SerializeObject(project, Formatting.Indented),
+                                Encoding.UTF8);
 
-                            if (!string.IsNullOrWhiteSpace(project.FileName))
-                            {
-                                File.WriteAllText(
-                                    project.FileName,
-                                    JsonConvert.SerializeObject(project, Formatting.Indented),
-                                    Encoding.UTF8);
-
-                                project.ChangesSavedToDisk();
-                                AddCurrentProject();
-                            }
+                            project.ChangesSavedToDisk();
+                            AddCurrentProject();
                         }
                     }
                 }
@@ -238,17 +247,15 @@ namespace TextFileSearch
 
         private void EditCurrentProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (ProjectForm form = new ProjectForm(project))
+            using ProjectForm form = new ProjectForm(project);
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                if (form.ShowDialog() == DialogResult.OK)
+                if (project.HasUnsavedPaths || project.HasUnsavedSearchPatterns)
                 {
-                    if (project.HasUnsavedPaths || project.HasUnsavedSearchPatterns)
-                    {
-                        LoadFiles();
-                    }
-
-                    UpdateSaveStatus();
+                    LoadFiles();
                 }
+
+                UpdateSaveStatus();
             }
         }
 
@@ -256,15 +263,15 @@ namespace TextFileSearch
         {
             if (CloseCurrentProject())
             {
-                using (OpenFileDialog dialog = new OpenFileDialog())
+                using OpenFileDialog dialog = new OpenFileDialog
                 {
-                    dialog.DefaultExt = "json";
-                    dialog.Filter = "Json File (*.json)|*.json";
+                    DefaultExt = "json",
+                    Filter = "Json File (*.json)|*.json"
+                };
 
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        OpenProject(dialog.FileName);
-                    }
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    OpenProject(dialog.FileName);
                 }
             }
         }
@@ -339,15 +346,15 @@ namespace TextFileSearch
                 {
                     if (string.IsNullOrWhiteSpace(project.FileName))
                     {
-                        using (SaveFileDialog dialog = new SaveFileDialog())
+                        using SaveFileDialog dialog = new SaveFileDialog
                         {
-                            dialog.DefaultExt = "json";
-                            dialog.Filter = "Json File (*.json)|*.json";
+                            DefaultExt = "json",
+                            Filter = "Json File (*.json)|*.json"
+                        };
 
-                            if (dialog.ShowDialog() == DialogResult.OK)
-                            {
-                                project.FileName = dialog.FileName;
-                            }
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                        {
+                            project.FileName = dialog.FileName;
                         }
                     }
 
@@ -398,12 +405,10 @@ namespace TextFileSearch
             {
                 UpdateControls();
 
-                using (ProjectForm form = new ProjectForm(project))
+                using ProjectForm form = new ProjectForm(project);
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
-                        LoadFiles();
-                    }
+                    LoadFiles();
                 }
             }
         }
@@ -454,8 +459,6 @@ namespace TextFileSearch
         {
             using (BackgroundWorker loadFilesWorker = new BackgroundWorker())
             {
-                loadFilesWorker.WorkerReportsProgress = true;
-                loadFilesWorker.ProgressChanged += LoadFilesWorker_ProgressChanged;
                 loadFilesWorker.RunWorkerCompleted += LoadFilesWorker_RunWorkerCompleted;
                 loadFilesWorker.DoWork += LoadFilesWorker_DoWork;
                 loadFilesWorker.RunWorkerAsync(project);
@@ -467,8 +470,7 @@ namespace TextFileSearch
 
         private void LoadFilesWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (sender is BackgroundWorker worker
-                && e.Argument is Project project)
+            if (sender is BackgroundWorker && e.Argument is Project project)
             {
                 try
                 {
@@ -480,7 +482,6 @@ namespace TextFileSearch
 
                             foreach (string file in Directory.EnumerateFiles(directory.Path, pattern, searchOption))
                             {
-                                worker.ReportProgress(0, file);
                                 project.TextFiles.Add(new TextFile { Path = file, Content = File.ReadAllText(file, Encoding.Default) });
                             }
                         }
@@ -509,14 +510,6 @@ namespace TextFileSearch
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-            }
-        }
-
-        private void LoadFilesWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            if (e.UserState is string file)
-            {
-                textBoxSearch.Text = $"Loading file {Path.GetFileName(file)} ({Path.GetFullPath(file)})";
             }
         }
 
@@ -559,14 +552,10 @@ namespace TextFileSearch
                 item.TextFileResults.Clear();
             }
 
-            using (BackgroundWorker worker = new BackgroundWorker())
-            {
-                worker.WorkerReportsProgress = true;
-                worker.ProgressChanged += Worker_ProgressChanged;
-                worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-                worker.DoWork += Worker_DoWork;
-                worker.RunWorkerAsync(project);
-            }
+            using BackgroundWorker worker = new();
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            worker.DoWork += Worker_DoWork;
+            worker.RunWorkerAsync(project);
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -585,13 +574,8 @@ namespace TextFileSearch
 
                     trie.Build();
 
-                    int count = 0;
-
                     foreach (var textFile in project.TextFiles)
                     {
-                        count++;
-                        worker.ReportProgress(count * 100 / project.TextFiles.Count, new Tuple<int, int, string>(count, project.TextFiles.Count, Path.GetFileName(textFile.Path)));
-
                         foreach (string word in trie.Find(textFile.Content))
                         {
                             SearchItem searchItem = project.SearchItems.FirstOrDefault(s => s.Value == word);
@@ -653,21 +637,10 @@ namespace TextFileSearch
             }
         }
 
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            if (e.UserState is Tuple<int, int, string> tuple)
-            {
-                progressBar.Value = e.ProgressPercentage;
-                textBoxSearch.Text = $"({tuple.Item1}/{tuple.Item2}) Searching file {Path.GetFileName(tuple.Item3)} ({Path.GetFullPath(tuple.Item3)})";
-            }
-        }
-
         private void ButtonLoadedFiles_Clicked(object sender, EventArgs e)
         {
-            using (LoadedFilesForm form = new LoadedFilesForm(project.TextFiles))
-            {
-                form.ShowDialog();
-            }
+            using LoadedFilesForm form = new LoadedFilesForm(project.TextFiles);
+            form.ShowDialog();
         }
 
         private void ButtonReloadFiles_Click(object sender, EventArgs e)

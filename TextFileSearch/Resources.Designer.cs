@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TextFileSearch.Properties {
+namespace TextFileSearch {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TextFileSearch.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TextFileSearch.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TextFileSearch.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -397,6 +397,16 @@ namespace TextFileSearch.Properties {
             get {
                 object obj = ResourceManager.GetObject("TextFileSearch_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon TextFileSearch_16x_128x {
+            get {
+                object obj = ResourceManager.GetObject("TextFileSearch_16x_128x", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

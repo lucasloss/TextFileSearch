@@ -30,6 +30,9 @@ namespace TextFileSearch
             buttonSelectPath.Click += ButtonSelectPath_Click;
             buttonAddPath.Click += ButtonAddPath_Click;
             buttonRemoveSelectedPath.Click += ButtonRemoveSelectedPath_Click;
+
+            buttonAddPath.Image = Resources.Add_16x;
+            buttonRemoveSelectedPath.Image = Resources.Remove_16x;
         }
 
         private void ButtonRemoveSelectedPath_Click(object sender, EventArgs e)
@@ -98,12 +101,11 @@ namespace TextFileSearch
 
         private void ButtonSelectPath_Click(object sender, EventArgs e)
         {
-            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            using FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    textBoxPath.Text = dialog.SelectedPath;
-                }
+                textBoxPath.Text = dialog.SelectedPath;
             }
         }
 
@@ -132,11 +134,11 @@ namespace TextFileSearch
             {
                 if (dataGridViewPath.Rows[e.RowIndex].DataBoundItem is PathInformation path && path.Exists)
                 {
-                    e.Value = Properties.Resources.Folder_16x;
+                    e.Value = Resources.Folder_16x;
                 }
                 else
                 {
-                    e.Value = Properties.Resources.FolderError_16x;
+                    e.Value = Resources.FolderError_16x;
                 }
             }
         }
