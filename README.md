@@ -22,7 +22,7 @@ Once the *Project* is configured, you click the **Search** button and all result
 
 ## Justification
 This project was created to be used in a very particular scenario. Here I list the reasoning behind this project:
-* I work for a company that has a very large legacy system, with dozens of modules in different languages. Maintenance is hard. Traceability doesn't exist. We are talking about a system that has around 10.000 source files.
+* I worked for a company that has a very large legacy system, with dozens of modules in different languages. Maintenance is hard. Traceability doesn't exist. We are talking about a system that has around 10.000 source files.
 * From time to time I needed to search for multiple strings in all files of the system. I would search using the *Find in files* option in **Notepad++**. But that would take too long and I was only able to search for one string at a time.
 * I found the Aho-Corasick algorythm and the rest is history.
 
