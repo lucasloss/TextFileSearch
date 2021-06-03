@@ -59,6 +59,7 @@
             this.flowLayoutPanelTopLeft = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
+            this.labelPanelAction = new System.Windows.Forms.Label();
             this.panelSearching.SuspendLayout();
             this.panelProgressTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -74,12 +75,13 @@
             this.panelSearching.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelSearching.BackColor = System.Drawing.Color.White;
             this.panelSearching.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSearching.Controls.Add(this.labelPanelAction);
             this.panelSearching.Controls.Add(this.panelProgressTitle);
             this.panelSearching.Controls.Add(this.progressBar);
-            this.panelSearching.Location = new System.Drawing.Point(71, 139);
+            this.panelSearching.Location = new System.Drawing.Point(121, 139);
             this.panelSearching.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panelSearching.Name = "panelSearching";
-            this.panelSearching.Size = new System.Drawing.Size(578, 70);
+            this.panelSearching.Size = new System.Drawing.Size(478, 85);
             this.panelSearching.TabIndex = 10;
             this.panelSearching.Visible = false;
             // 
@@ -91,7 +93,7 @@
             this.panelProgressTitle.Location = new System.Drawing.Point(0, 0);
             this.panelProgressTitle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panelProgressTitle.Name = "panelProgressTitle";
-            this.panelProgressTitle.Size = new System.Drawing.Size(576, 25);
+            this.panelProgressTitle.Size = new System.Drawing.Size(476, 25);
             this.panelProgressTitle.TabIndex = 13;
             // 
             // labelProgressPanelTitle
@@ -112,7 +114,7 @@
             this.progressBar.Location = new System.Drawing.Point(13, 36);
             this.progressBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(550, 21);
+            this.progressBar.Size = new System.Drawing.Size(449, 21);
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 1;
             // 
@@ -279,7 +281,6 @@
             // 
             this.labelSearchResults.BackColor = System.Drawing.Color.DimGray;
             this.labelSearchResults.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelSearchResults.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelSearchResults.ForeColor = System.Drawing.Color.White;
             this.labelSearchResults.Location = new System.Drawing.Point(0, 0);
             this.labelSearchResults.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -375,6 +376,15 @@
             this.statusStripMain.TabIndex = 16;
             this.statusStripMain.Text = "statusStrip1";
             // 
+            // labelPanelAction
+            // 
+            this.labelPanelAction.AutoSize = true;
+            this.labelPanelAction.Location = new System.Drawing.Point(13, 60);
+            this.labelPanelAction.Name = "labelPanelAction";
+            this.labelPanelAction.Size = new System.Drawing.Size(51, 15);
+            this.labelPanelAction.TabIndex = 14;
+            this.labelPanelAction.Text = "Action...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -390,6 +400,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Text File Search";
             this.panelSearching.ResumeLayout(false);
+            this.panelSearching.PerformLayout();
             this.panelProgressTitle.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -438,6 +449,7 @@
         private System.Windows.Forms.Panel panelProgressTitle;
         private System.Windows.Forms.Label labelProgressPanelTitle;
         private System.Windows.Forms.Panel panelSearchResult;
+        private System.Windows.Forms.Label labelPanelAction;
     }
 }
 

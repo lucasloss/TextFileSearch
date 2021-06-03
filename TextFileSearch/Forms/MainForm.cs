@@ -464,7 +464,7 @@ namespace TextFileSearch
                 loadFilesWorker.RunWorkerAsync(project);
             }
 
-            ShowProgressPanel();
+            ShowProgressPanel("Loading files...");
             progressBar.Style = ProgressBarStyle.Marquee;
         }
 
@@ -511,9 +511,13 @@ namespace TextFileSearch
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            else
+            {
+                buttonSearch.PerformClick();
+            }
         }
 
-        private void ShowProgressPanel()
+        private void ShowProgressPanel(string action)
         {
             panelSearching.Visible = true;
             buttonSearch.Enabled = false;
@@ -521,6 +525,7 @@ namespace TextFileSearch
             buttonLoadedFiles.Enabled = false;
             textBoxSearchResult.Enabled = false;
             menuStrip.Enabled = false;
+            labelPanelAction.Text = action;
         }
 
         private void HideProgresPanel()
@@ -544,7 +549,7 @@ namespace TextFileSearch
 
         private void Search()
         {
-            ShowProgressPanel();
+            ShowProgressPanel("Searching files...");
             progressBar.Style = ProgressBarStyle.Continuous;
 
             foreach (SearchItem item in project.SearchItems)
@@ -553,9 +558,16 @@ namespace TextFileSearch
             }
 
             using BackgroundWorker worker = new();
+            worker.WorkerReportsProgress = true;
+            worker.ProgressChanged += Worker_ProgressChanged;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             worker.DoWork += Worker_DoWork;
             worker.RunWorkerAsync(project);
+        }
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -574,8 +586,13 @@ namespace TextFileSearch
 
                     trie.Build();
 
+                    int count = 0;
+
                     foreach (var textFile in project.TextFiles)
                     {
+                        count++;
+                        worker.ReportProgress(count * 100 / project.TextFiles.Count, new Tuple<int, int, string>(count, project.TextFiles.Count, Path.GetFileName(textFile.Path)));
+
                         foreach (string word in trie.Find(textFile.Content))
                         {
                             SearchItem searchItem = project.SearchItems.FirstOrDefault(s => s.Value == word);
