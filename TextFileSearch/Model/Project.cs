@@ -150,22 +150,22 @@ namespace TextFileSearch
         private bool UnsavedPaths(Project project)
         {
             return !(Paths.Count == project.Paths.Count
-                && Paths.Except(project.Paths).Count() == 0
-                && project.Paths.Except(Paths).Count() == 0);
+                && !Paths.Except(project.Paths).Any()
+                && !project.Paths.Except(Paths).Any());
         }
 
         private bool UnsavedSearchItems(Project project)
         {
             return !(SearchItems.Count == project.SearchItems.Count
-                && SearchItems.Except(project.SearchItems).Count() == 0
-                && project.SearchItems.Except(SearchItems).Count() == 0);
+                && !SearchItems.Except(project.SearchItems).Any()
+                && !project.SearchItems.Except(SearchItems).Any());
         }
 
         private bool UnsavedSearchPatterns(Project project)
         {
             return !(SearchPatterns.Count == project.SearchPatterns.Count
-                && SearchPatterns.Except(project.SearchPatterns).Count() == 0
-                && project.SearchPatterns.Except(SearchPatterns).Count() == 0);
+                && !SearchPatterns.Except(project.SearchPatterns).Any()
+                && !project.SearchPatterns.Except(SearchPatterns).Any());
         }
     }
 }
