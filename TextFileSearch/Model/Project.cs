@@ -82,12 +82,7 @@ namespace TextFileSearch
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            var hashCode = -1631017868;
-            hashCode = (hashCode * -1521134295) + EqualityComparer<List<string>>.Default.GetHashCode(SearchPatterns);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<List<SearchItem>>.Default.GetHashCode(SearchItems);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<List<PathInformation>>.Default.GetHashCode(Paths);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(FileName);
-            return hashCode;
+            return System.HashCode.Combine(SearchPatterns, SearchItems, Paths, FileName);
         }
 
         /// <summary>
