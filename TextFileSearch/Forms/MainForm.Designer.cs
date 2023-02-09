@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelSearching = new System.Windows.Forms.Panel();
+            this.labelPanelAction = new System.Windows.Forms.Label();
             this.panelProgressTitle = new System.Windows.Forms.Panel();
             this.labelProgressPanelTitle = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -53,21 +54,20 @@
             this.textBoxSearchResult = new System.Windows.Forms.RichTextBox();
             this.labelSearchResults = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.flowLayoutPanelTopLeft = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonSearch = new System.Windows.Forms.Button();
             this.flowLayoutPanelTopRight = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonLoadedFiles = new System.Windows.Forms.Button();
             this.buttonReloadFiles = new System.Windows.Forms.Button();
-            this.flowLayoutPanelTopLeft = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonSearch = new System.Windows.Forms.Button();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
-            this.labelPanelAction = new System.Windows.Forms.Label();
             this.panelSearching.SuspendLayout();
             this.panelProgressTitle.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.panel.SuspendLayout();
             this.panelSearchResult.SuspendLayout();
             this.panelTop.SuspendLayout();
-            this.flowLayoutPanelTopRight.SuspendLayout();
             this.flowLayoutPanelTopLeft.SuspendLayout();
+            this.flowLayoutPanelTopRight.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSearching
@@ -84,6 +84,15 @@
             this.panelSearching.Size = new System.Drawing.Size(478, 85);
             this.panelSearching.TabIndex = 10;
             this.panelSearching.Visible = false;
+            // 
+            // labelPanelAction
+            // 
+            this.labelPanelAction.AutoSize = true;
+            this.labelPanelAction.Location = new System.Drawing.Point(13, 60);
+            this.labelPanelAction.Name = "labelPanelAction";
+            this.labelPanelAction.Size = new System.Drawing.Size(51, 15);
+            this.labelPanelAction.TabIndex = 14;
+            this.labelPanelAction.Text = "Action...";
             // 
             // panelProgressTitle
             // 
@@ -257,10 +266,10 @@
             this.panelSearchResult.Controls.Add(this.textBoxSearchResult);
             this.panelSearchResult.Controls.Add(this.labelSearchResults);
             this.panelSearchResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSearchResult.Location = new System.Drawing.Point(6, 35);
+            this.panelSearchResult.Location = new System.Drawing.Point(6, 33);
             this.panelSearchResult.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panelSearchResult.Name = "panelSearchResult";
-            this.panelSearchResult.Size = new System.Drawing.Size(710, 277);
+            this.panelSearchResult.Size = new System.Drawing.Size(710, 279);
             this.panelSearchResult.TabIndex = 21;
             // 
             // textBoxSearchResult
@@ -272,7 +281,7 @@
             this.textBoxSearchResult.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBoxSearchResult.MaxLength = 0;
             this.textBoxSearchResult.Name = "textBoxSearchResult";
-            this.textBoxSearchResult.Size = new System.Drawing.Size(708, 255);
+            this.textBoxSearchResult.Size = new System.Drawing.Size(708, 257);
             this.textBoxSearchResult.TabIndex = 20;
             this.textBoxSearchResult.Text = "";
             this.textBoxSearchResult.WordWrap = false;
@@ -293,64 +302,25 @@
             // panelTop
             // 
             this.panelTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelTop.Controls.Add(this.flowLayoutPanelTopRight);
             this.panelTop.Controls.Add(this.flowLayoutPanelTopLeft);
+            this.panelTop.Controls.Add(this.flowLayoutPanelTopRight);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(6, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(710, 35);
+            this.panelTop.Size = new System.Drawing.Size(710, 33);
             this.panelTop.TabIndex = 17;
-            // 
-            // flowLayoutPanelTopRight
-            // 
-            this.flowLayoutPanelTopRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelTopRight.AutoSize = true;
-            this.flowLayoutPanelTopRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelTopRight.Controls.Add(this.buttonLoadedFiles);
-            this.flowLayoutPanelTopRight.Controls.Add(this.buttonReloadFiles);
-            this.flowLayoutPanelTopRight.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanelTopRight.Location = new System.Drawing.Point(527, 2);
-            this.flowLayoutPanelTopRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanelTopRight.Name = "flowLayoutPanelTopRight";
-            this.flowLayoutPanelTopRight.Size = new System.Drawing.Size(184, 31);
-            this.flowLayoutPanelTopRight.TabIndex = 18;
-            // 
-            // buttonLoadedFiles
-            // 
-            this.buttonLoadedFiles.AutoSize = true;
-            this.buttonLoadedFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonLoadedFiles.Location = new System.Drawing.Point(83, 3);
-            this.buttonLoadedFiles.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.buttonLoadedFiles.Name = "buttonLoadedFiles";
-            this.buttonLoadedFiles.Size = new System.Drawing.Size(101, 25);
-            this.buttonLoadedFiles.TabIndex = 5;
-            this.buttonLoadedFiles.Text = "No Files Loaded";
-            this.buttonLoadedFiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonLoadedFiles.UseVisualStyleBackColor = true;
-            // 
-            // buttonReloadFiles
-            // 
-            this.buttonReloadFiles.AutoSize = true;
-            this.buttonReloadFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonReloadFiles.Location = new System.Drawing.Point(0, 3);
-            this.buttonReloadFiles.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
-            this.buttonReloadFiles.Name = "buttonReloadFiles";
-            this.buttonReloadFiles.Size = new System.Drawing.Size(79, 25);
-            this.buttonReloadFiles.TabIndex = 3;
-            this.buttonReloadFiles.Text = "Reload Files";
-            this.buttonReloadFiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonReloadFiles.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanelTopLeft
             // 
             this.flowLayoutPanelTopLeft.AutoSize = true;
             this.flowLayoutPanelTopLeft.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelTopLeft.Controls.Add(this.buttonSearch);
-            this.flowLayoutPanelTopLeft.Location = new System.Drawing.Point(0, 2);
+            this.flowLayoutPanelTopLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelTopLeft.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelTopLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.flowLayoutPanelTopLeft.Name = "flowLayoutPanelTopLeft";
-            this.flowLayoutPanelTopLeft.Size = new System.Drawing.Size(56, 31);
+            this.flowLayoutPanelTopLeft.Size = new System.Drawing.Size(397, 33);
             this.flowLayoutPanelTopLeft.TabIndex = 17;
             // 
             // buttonSearch
@@ -366,6 +336,44 @@
             this.buttonSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSearch.UseVisualStyleBackColor = true;
             // 
+            // flowLayoutPanelTopRight
+            // 
+            this.flowLayoutPanelTopRight.Controls.Add(this.buttonLoadedFiles);
+            this.flowLayoutPanelTopRight.Controls.Add(this.buttonReloadFiles);
+            this.flowLayoutPanelTopRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanelTopRight.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanelTopRight.Location = new System.Drawing.Point(397, 0);
+            this.flowLayoutPanelTopRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.flowLayoutPanelTopRight.Name = "flowLayoutPanelTopRight";
+            this.flowLayoutPanelTopRight.Size = new System.Drawing.Size(313, 33);
+            this.flowLayoutPanelTopRight.TabIndex = 18;
+            // 
+            // buttonLoadedFiles
+            // 
+            this.buttonLoadedFiles.AutoSize = true;
+            this.buttonLoadedFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonLoadedFiles.Location = new System.Drawing.Point(212, 3);
+            this.buttonLoadedFiles.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.buttonLoadedFiles.Name = "buttonLoadedFiles";
+            this.buttonLoadedFiles.Size = new System.Drawing.Size(101, 25);
+            this.buttonLoadedFiles.TabIndex = 5;
+            this.buttonLoadedFiles.Text = "No Files Loaded";
+            this.buttonLoadedFiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonLoadedFiles.UseVisualStyleBackColor = true;
+            // 
+            // buttonReloadFiles
+            // 
+            this.buttonReloadFiles.AutoSize = true;
+            this.buttonReloadFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonReloadFiles.Location = new System.Drawing.Point(129, 3);
+            this.buttonReloadFiles.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
+            this.buttonReloadFiles.Name = "buttonReloadFiles";
+            this.buttonReloadFiles.Size = new System.Drawing.Size(79, 25);
+            this.buttonReloadFiles.TabIndex = 3;
+            this.buttonReloadFiles.Text = "Reload Files";
+            this.buttonReloadFiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonReloadFiles.UseVisualStyleBackColor = true;
+            // 
             // statusStripMain
             // 
             this.statusStripMain.Location = new System.Drawing.Point(0, 339);
@@ -375,15 +383,6 @@
             this.statusStripMain.SizingGrip = false;
             this.statusStripMain.TabIndex = 16;
             this.statusStripMain.Text = "statusStrip1";
-            // 
-            // labelPanelAction
-            // 
-            this.labelPanelAction.AutoSize = true;
-            this.labelPanelAction.Location = new System.Drawing.Point(13, 60);
-            this.labelPanelAction.Name = "labelPanelAction";
-            this.labelPanelAction.Size = new System.Drawing.Size(51, 15);
-            this.labelPanelAction.TabIndex = 14;
-            this.labelPanelAction.Text = "Action...";
             // 
             // MainForm
             // 
@@ -408,10 +407,10 @@
             this.panelSearchResult.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
-            this.flowLayoutPanelTopRight.ResumeLayout(false);
-            this.flowLayoutPanelTopRight.PerformLayout();
             this.flowLayoutPanelTopLeft.ResumeLayout(false);
             this.flowLayoutPanelTopLeft.PerformLayout();
+            this.flowLayoutPanelTopRight.ResumeLayout(false);
+            this.flowLayoutPanelTopRight.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
