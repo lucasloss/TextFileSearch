@@ -248,11 +248,17 @@ namespace TextFileSearch
         private void EditCurrentProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using ProjectForm form = new ProjectForm(project);
+
             if (form.ShowDialog() == DialogResult.OK)
             {
                 if (project.HasUnsavedPaths || project.HasUnsavedSearchPatterns)
                 {
                     LoadFiles();
+                }
+
+                if (project.HasUnsavedSearchItems)
+                {
+                    Search();
                 }
 
                 UpdateSaveStatus();
