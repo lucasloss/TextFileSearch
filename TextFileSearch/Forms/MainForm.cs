@@ -15,7 +15,7 @@ namespace TextFileSearch
     {
         private const string ApplicationConfigurationFileName = "ApplicationConfiguration.json";
         private ApplicationConfiguration applicationConfigurarion;
-        private Project project = new Project();
+        private Project project = new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
@@ -56,7 +56,7 @@ namespace TextFileSearch
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using AboutBoxForm form = new AboutBoxForm();
+            using AboutBoxForm form = new();
             form.ShowDialog();
         }
 
@@ -66,7 +66,7 @@ namespace TextFileSearch
             {
                 if (!project.IsEmpty())
                 {
-                    using SaveFileDialog dialog = new SaveFileDialog
+                    using SaveFileDialog dialog = new()
                     {
                         DefaultExt = "json",
                         Filter = "Json File (*.json)|*.json"
@@ -121,7 +121,7 @@ namespace TextFileSearch
 
                 foreach (var recentProject in applicationConfigurarion.RecentProjects.OrderByDescending(p => p.Timestamp))
                 {
-                    ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem
+                    ToolStripMenuItem toolStripMenuItem = new()
                     {
                         Image = Resources.TextFile_16x,
                         Text = recentProject.FileName,
@@ -134,7 +134,7 @@ namespace TextFileSearch
 
                 recentProjectsToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
 
-                ToolStripMenuItem toolStripMenuItemClearRecentProjects = new ToolStripMenuItem
+                ToolStripMenuItem toolStripMenuItemClearRecentProjects = new()
                 {
                     Image = Resources.ClearCollection_16x,
                     Text = "Clear List",
@@ -247,7 +247,7 @@ namespace TextFileSearch
 
         private void EditCurrentProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using ProjectForm form = new ProjectForm(project);
+            using ProjectForm form = new(project);
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -269,7 +269,7 @@ namespace TextFileSearch
         {
             if (CloseCurrentProject())
             {
-                using OpenFileDialog dialog = new OpenFileDialog
+                using OpenFileDialog dialog = new()
                 {
                     DefaultExt = "json",
                     Filter = "Json File (*.json)|*.json"
@@ -307,7 +307,7 @@ namespace TextFileSearch
                     path.Exists = Directory.Exists(path.Path);
                 }
 
-                using (ProjectForm projectForm = new ProjectForm(project))
+                using (ProjectForm projectForm = new(project))
                 {
                     projectForm.ShowDialog();
                     LoadFiles();
@@ -352,7 +352,7 @@ namespace TextFileSearch
                 {
                     if (string.IsNullOrWhiteSpace(project.FileName))
                     {
-                        using SaveFileDialog dialog = new SaveFileDialog
+                        using SaveFileDialog dialog = new()
                         {
                             DefaultExt = "json",
                             Filter = "Json File (*.json)|*.json"
@@ -411,7 +411,7 @@ namespace TextFileSearch
             {
                 UpdateControls();
 
-                using ProjectForm form = new ProjectForm(project);
+                using ProjectForm form = new(project);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadFiles();
@@ -463,7 +463,7 @@ namespace TextFileSearch
 
         private void LoadFilesWorker()
         {
-            using (BackgroundWorker loadFilesWorker = new BackgroundWorker())
+            using (BackgroundWorker loadFilesWorker = new())
             {
                 loadFilesWorker.RunWorkerCompleted += LoadFilesWorker_RunWorkerCompleted;
                 loadFilesWorker.DoWork += LoadFilesWorker_DoWork;
@@ -583,7 +583,7 @@ namespace TextFileSearch
                 if (sender is BackgroundWorker worker)
                 {
                     Project project = e.Argument as Project;
-                    AhoCorasick.Trie trie = new AhoCorasick.Trie();
+                    AhoCorasick.Trie trie = new();
 
                     foreach (var searchItem in project.SearchItems)
                     {
@@ -644,7 +644,7 @@ namespace TextFileSearch
 
             try
             {
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new();
 
                 foreach (var searchItem in project.SearchItems)
                 {
@@ -662,7 +662,7 @@ namespace TextFileSearch
 
         private void ButtonLoadedFiles_Clicked(object sender, EventArgs e)
         {
-            using LoadedFilesForm form = new LoadedFilesForm(project.TextFiles);
+            using LoadedFilesForm form = new(project.TextFiles);
             form.ShowDialog();
         }
 
